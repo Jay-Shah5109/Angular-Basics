@@ -349,13 +349,14 @@
     </svg>
 
   </div>
-  <div>Hello {{ name }}, welcome to Angular tutorial.</div>
+  <div>Hello {{ message }}, welcome to Angular tutorial.</div>
 
   <!-- Resources -->
   <h2>Resources</h2>
   <p>Here are some links to help you get started:</p>
-  <div app-test></div>
 
+<!--  <div app-test [parentData]="name"></div>-->
+  <app-test (childEvent)="message=$event" [parentData]="name"></app-test>
 
   <div class="card-container">
     <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
