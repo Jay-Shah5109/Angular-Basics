@@ -7,6 +7,7 @@ import { TestComponent } from './test/test.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeedetailsComponent } from './employeedetails/employeedetails.component';
 import { EmployeeService } from './employee.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EmployeeService } from './employee.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule
   ],
   exports: [
   TestComponent
