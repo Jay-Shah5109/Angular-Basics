@@ -2,3 +2,8 @@
 nav a.active {
   color: #123be5;
 }
+
+.items li.selected {
+  background-color: #CFDBDC;
+  color: white;
+}
