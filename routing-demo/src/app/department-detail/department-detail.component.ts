@@ -11,8 +11,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
     <button><a (click)="goNext()">Next</a></button>
 
     <div>
-      <button (click)="gotoDepartments(
-      )">Back</button>
+      <button (click)="gotoDepartments()">Back</button>
     </div>
   `,
   styles: [
@@ -35,17 +34,20 @@ export class DepartmentDetailComponent implements OnInit {
 
   goPrevious() {
     let previousID = this.departmentID-1;
-    this.router.navigate(['/departments',previousID]);
+//     this.router.navigate(['/departments',previousID]);
+     this.router.navigate(['../',previousID], {relativeTo: this.route});
   }
 
   goNext() {
       let nextID = this.departmentID+1;
-      this.router.navigate(['/departments',nextID]);
+//       this.router.navigate(['/departments',nextID]);
+       this.router.navigate(['../',nextID], {relativeTo: this.route});
     }
 
   gotoDepartments() {
     let selectedID = this.departmentID ? this.departmentID : null;
-    this.router.navigate(['/departments',{id: selectedID, test: "testID"}]);
+    //this.router.navigate(['/departments',{id: selectedID, test: "testID"}]); // This was absolute routing path
+    this.router.navigate(['../', {id: selectedID}], {relativeTo: this.route}); // Relative routing path
   }
 
 }
