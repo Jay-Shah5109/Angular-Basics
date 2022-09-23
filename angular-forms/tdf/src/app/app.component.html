@@ -486,9 +486,9 @@
   <h1>Bootstrap Enrollment Form</h1>
   <form #userForm="ngForm">
 
-    <pre>{{userForm.value | json}}</pre>
-    <hr/>
-    <pre>{{userModel | json}}</pre>
+<!--    <pre>{{userForm.value | json}}</pre>-->
+<!--    <hr/>-->
+<!--    <pre>{{userModel | json}}</pre>-->
 
 <!--    Commenting the address part of code, since not required in the tutorial, but pay attention how the ngModelGroup
         directive is used here -->
@@ -515,8 +515,15 @@
 <!--      We have used property data binding as seen in the ngModel below. Property data binding is ONE WAY BINDING -->
 <!--     [ngModel]="userModel.name" -- This is one way binding -- without banana type binding -->
 <!--      Using the banana way binding, we can introduce two way binding -->
-      <input type="text" class="form-control" name="userName" [(ngModel)]="userModel.name">
+      <input type="text" required #name="ngModel" class="form-control" name="userName" [(ngModel)]="userModel.name">
     </div>
+
+<!-- Only #name will point to the DOM for name but #name="ngModel" will point to the ngModel for name  -->
+
+    {{name.untouched}} <!--  This statement will display three values for the name field: ng-touched, ng-dirty, ng-valid
+    depending on the value is changed or not. Default values are: ng-untouched, ng-pristine, ng-valid -->
+    {{name.pristine}}
+    {{name.valid}}
     <div class="form-group">
       <label>Email</label>
       <input type="email" class="form-control" name="email" [(ngModel)]="userModel.email">
