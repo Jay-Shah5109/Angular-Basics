@@ -484,11 +484,13 @@
 
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
   <h1>Bootcamp Enrollment Form</h1>
-  <form #userForm="ngForm">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
     <pre>{{userForm.value | json}}</pre>
     <hr/>
     <pre>{{userModel | json}}</pre>
+    <hr/>
+    <pre>{{userForm.valid | json}}</pre>
 
 <!--    Commenting the address part of code, since not required in the tutorial, but pay attention how the ngModelGroup
         directive is used here -->
@@ -524,7 +526,7 @@
       <label>Email</label>
       <input type="email" #email="ngModel" pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
              required class="form-control" name="email" [(ngModel)]="userModel.email"
-             [class.is-invalid]="email.invalid || email.touched">
+             [class.is-invalid]="email.invalid && email.touched">
       <div *ngIf="email.errors && (email.invalid || email.untouched)">
         <small class="text-danger" *ngIf="email.errors.required">Email is required</small>
         <small class="text-danger" *ngIf="email.errors.pattern">Email format is invalid</small>
@@ -542,10 +544,13 @@
       </div>
     </div>
     <div class="form-group">
-      <select class="custom-select" name="topic" [(ngModel)]="userModel.topic">
-        <option value="">I am interested in</option>
+      <select (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)" class="custom-select"
+              #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched"
+              name="topic" [(ngModel)]="userModel.topic">
+        <option value="default">I am interested in</option>
         <option *ngFor="let topic of topics">{{topic}}</option>
       </select>
+      <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please select a topic</small>
     </div>
     <div class="mb-3">
       <label>Time Preference</label>
@@ -562,6 +567,6 @@
       <input class="form-check-input" name="subscribe" [(ngModel)]="userModel.subscribe" type="checkbox">
       <label class="form-check-label">Send me promotional offers</label>
     </div>
-    <button class="btn btn-primary" type="submit">Submit Form</button>
+    <button [disabled]="userForm.form.invalid || topicHasError" class="btn btn-primary" type="submit">Submit Form</button>
   </form>
 </div>
