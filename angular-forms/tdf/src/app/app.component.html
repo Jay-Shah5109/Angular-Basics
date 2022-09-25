@@ -489,6 +489,8 @@
     <pre>{{userForm.value | json}}</pre>
     <hr/>
     <pre>{{userModel | json}}</pre>
+    <hr/>
+    <pre>{{userForm.valid | json}}</pre>
 
 <!--    Commenting the address part of code, since not required in the tutorial, but pay attention how the ngModelGroup
         directive is used here -->
@@ -565,6 +567,6 @@
       <input class="form-check-input" name="subscribe" [(ngModel)]="userModel.subscribe" type="checkbox">
       <label class="form-check-label">Send me promotional offers</label>
     </div>
-    <button class="btn btn-primary" type="submit">Submit Form</button>
+    <button [disabled]="userForm.form.invalid || topicHasError" class="btn btn-primary" type="submit">Submit Form</button>
   </form>
 </div>
