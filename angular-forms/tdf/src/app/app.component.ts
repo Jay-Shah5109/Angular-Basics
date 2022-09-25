@@ -8,5 +8,5 @@ import { User } from './user';
 })
 export class AppComponent {
   topics = ['Angular','React','Java','Python'];
-  userModel=new User('Jay','jay@test.com',4567812345,'','morning',true);
+  userModel=new User('','jay@test.com',4567812345,'','morning',true);
 }
