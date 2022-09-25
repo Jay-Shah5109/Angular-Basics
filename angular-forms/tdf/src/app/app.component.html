@@ -484,7 +484,7 @@
 
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
   <h1>Bootcamp Enrollment Form</h1>
-  <form #userForm="ngForm">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
     <pre>{{userForm.value | json}}</pre>
     <hr/>
@@ -526,7 +526,7 @@
       <label>Email</label>
       <input type="email" #email="ngModel" pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
              required class="form-control" name="email" [(ngModel)]="userModel.email"
-             [class.is-invalid]="email.invalid || email.touched">
+             [class.is-invalid]="email.invalid && email.touched">
       <div *ngIf="email.errors && (email.invalid || email.untouched)">
         <small class="text-danger" *ngIf="email.errors.required">Email is required</small>
         <small class="text-danger" *ngIf="email.errors.pattern">Email format is invalid</small>
