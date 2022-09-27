@@ -26,12 +26,13 @@ export class AppComponent {
     }
   }
 
-  onSubmit() {
+  onSubmit(userForm: any) {
 //     console.log(this.userModel);
-  this.formSubmitted=true;
-  this._enrollmentservice.enroll(this.userModel).subscribe(
-      data => console.log('Success!', data),
-      error => this.errorMessage=error.statusText
-    )
+  console.log(userForm);
+//   this.formSubmitted=true;
+//   this._enrollmentservice.enroll(this.userModel).subscribe(
+//       data => console.log('Success!', data),
+//       error => this.errorMessage=error.statusText
+//     );
   }
 }
