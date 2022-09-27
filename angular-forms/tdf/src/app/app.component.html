@@ -484,7 +484,10 @@
 
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
   <h1>Bootcamp Enrollment Form</h1>
-  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  <form #userForm="ngForm" *ngIf="!formSubmitted" (ngSubmit)="onSubmit()" novalidate>
 
     <pre>{{userForm.value | json}}</pre>
     <hr/>
