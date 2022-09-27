@@ -23,5 +23,27 @@ export class AppComponent {
     }
   );
 
+  loadAPIData() {
+//   The setValue method works strictly to populate all the values in the form compulsorily, instead use patchValue method
+// so that, all values in the form is not required to be instantiated from start
+//     this.registrationForm.setValue({
+//
+//       userName: 'Jay Shah',
+//           password: 'test',
+//           confirmPassword: 'test',
+//           address:
+//             {
+//               city: 'Mumbai',
+//               state: 'Maharashtra',
+//               postalCode: '12456'
+//             }
+//
+//     });
 
+this.registrationForm.patchValue({
+      userName: 'Jay Shah',
+          password: 'test',
+          confirmPassword: 'test'
+    });
+  }
 }
