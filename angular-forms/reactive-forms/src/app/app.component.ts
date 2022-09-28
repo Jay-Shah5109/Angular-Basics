@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { forbiddenNameValidator } from './shared/user-name.validator';
+import { passwordValidator } from './shared/password.validator';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +49,7 @@ registrationForm=this.fb.group({
               postalCode: ['123545']
             })
 
-});
+}, {validator: passwordValidator});
 
   loadAPIData() {
 //   The setValue method works strictly to populate all the values in the form compulsorily, instead use patchValue method
