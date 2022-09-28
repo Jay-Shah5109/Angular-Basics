@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { forbiddenNameValidator } from './shared/user-name.validator';
 import { passwordValidator } from './shared/password.validator';
 
@@ -8,15 +8,49 @@ import { passwordValidator } from './shared/password.validator';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'reactive-forms';
+  registrationForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
+  }
 
+  get email() {
+      return this.registrationForm.get('email');
   }
 
   get userName() {
-    return this.registrationForm.get('userName');
+      return this.registrationForm.get('userName');
+  }
+
+  ngOnInit() {
+
+    // Using formBuilder in the below code to populate values
+    this.registrationForm=this.fb.group({
+              userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/password/)]],
+              password: [''],
+              confirmPassword: [''],
+              email: [''],
+              subscribe: [false],
+              address: this.fb.group(
+                {
+                  city: ['Mumbai'],
+                  state: ['Maharashtra'],
+                  postalCode: ['123545']
+                })
+    }, {validator: passwordValidator});
+
+    // Below code is for enabling the email field if the checkbox is ticked
+    this.registrationForm.get('subscribe')!.valueChanges
+        .subscribe(checkedValue => {
+            const email = this.registrationForm.get('email');
+            if(checkedValue) {
+              email!.setValidators(Validators.required);
+            } else {
+              email!.clearValidators();
+            }
+            email!.updateValueAndValidity();
+            });
   }
 
 
@@ -34,22 +68,6 @@ export class AppComponent {
 //         })
 //     }
 //   );
-
-// Using formBuilder in the below code to populate values
-
-registrationForm=this.fb.group({
-
-          userName: ['', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/password/)]],
-          password: [''],
-          confirmPassword: [''],
-          address: this.fb.group(
-            {
-              city: ['Mumbai'],
-              state: ['Maharashtra'],
-              postalCode: ['123545']
-            })
-
-}, {validator: passwordValidator});
 
   loadAPIData() {
 //   The setValue method works strictly to populate all the values in the form compulsorily, instead use patchValue method
