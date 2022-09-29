@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h2>Registration Form</h2>
-  <form [formGroup]="registrationForm">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     {{registrationForm.value | json}}
     <div class="form-group">
       <label>User Name</label>

@@ -31,6 +31,10 @@ export class AppComponent implements OnInit{
     this.alternateEmails.push(this.fb.control(' '));
   }
 
+  onSubmit() {
+    console.log(this.registrationForm.value);
+  }
+
   ngOnInit() {
 
     // Using formBuilder in the below code to populate values
