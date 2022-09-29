@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { forbiddenNameValidator } from './shared/user-name.validator';
 import { passwordValidator } from './shared/password.validator';
 
@@ -23,6 +23,14 @@ export class AppComponent implements OnInit{
       return this.registrationForm.get('userName');
   }
 
+  get alternateEmails() {
+    return this.registrationForm.get('alternateEmails') as FormArray;
+  }
+
+  addAlternateEmails() {
+    this.alternateEmails.push(this.fb.control(' '));
+  }
+
   ngOnInit() {
 
     // Using formBuilder in the below code to populate values
@@ -37,7 +45,8 @@ export class AppComponent implements OnInit{
                   city: ['Mumbai'],
                   state: ['Maharashtra'],
                   postalCode: ['123545']
-                })
+                }),
+              alternateEmails: this.fb.array([])
     }, {validator: passwordValidator});
 
     // Below code is for enabling the email field if the checkbox is ticked
