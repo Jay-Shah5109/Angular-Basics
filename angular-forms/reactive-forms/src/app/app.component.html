@@ -55,7 +55,7 @@
       <label class="form-check-label">Send me promotional offers</label>
     </div>
 
-    <button formControlName="confirmPassword" class="btn btn-primary" type="submit">Submit Form</button>
+    <button [disabled]='!registrationForm.valid' formControlName="confirmPassword" class="btn btn-primary" type="submit">Submit Form</button>
     <button (click)="loadAPIData()" class="btn btn-secondary ml-2" type="button">Load API Data</button>
   </form>
 </div>
